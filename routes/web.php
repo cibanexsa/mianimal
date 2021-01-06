@@ -1,8 +1,10 @@
 <?php
 
+use App\Exports\AnimalExport;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AnimalController;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,8 @@ use App\Http\Controllers\AnimalController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return Excel::download(new AnimalExport, 'animales.xlsx');
 });
 
 

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AnimalExport;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB; //trabajar con BD usando SP
 use Illuminate\Http\Request; // Recuperar datos de la vista
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
 class AnimalController extends Controller
@@ -55,4 +57,9 @@ class AnimalController extends Controller
         [$request->id, $request->nombre, $request->especie, $request->genero]);
         return back();
     } 
+
+    public function export() 
+{
+    return Excel::download(new AnimalExport, 'animales.xlsx');
+}
 }
